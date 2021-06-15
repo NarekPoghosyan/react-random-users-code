@@ -39,5 +39,14 @@ code {
 @media (min-width: 100px) and (max-width: 767px) {
   body {
     padding: 40px 16px;
+    #root {
+      .App {
+        .conteiner_user {
+          .content_user {
+            margin-top: 20px;
+          }
+        }
+      }
+    }
   }
 }
