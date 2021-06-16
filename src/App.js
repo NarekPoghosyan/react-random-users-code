@@ -1,5 +1,5 @@
 // libraries
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 // actions
@@ -18,23 +18,23 @@ const App = ({ fetchUsers, filterUsersByParams, filteredUsers, setLocalStorageUs
   })
 
   // Set parameters for filtering by gender
-  const selectGender = (e, i) => {
+  const selectGender = useCallback((e, i) => {
     setParams({ ...params, [e.target.name]: e.target.value, indexForGender: i })
-  }
+  }, [params])
 
   // Set parameters for filtering by age
-  const selectAge = (i, firstAge, lastAge) => {
+  const selectAge = useCallback((i, firstAge, lastAge) => {
     if (params.ageRange[0] === firstAge && params.ageRange[1] === lastAge) {
       setParams({ ...params, ageRange: [null, null], indexForAge: null })
       return
     }
     setParams({ ...params, ageRange: [firstAge, lastAge], indexForAge: i })
-  }
+  }, [params])
 
   // Set parameters for filtering by search input text
-  const searchUser = inputValue => {
+  const searchUser = useCallback(inputValue => {
     setParams({ ...params, searchText: inputValue.toLowerCase() })
-  }
+  }, [params])
 
   // Checking localStorage users
   useEffect(() => {
